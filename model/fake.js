@@ -70,7 +70,7 @@ const attack = async (proxy) => {
         for (let it in data2) {
           ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
         }
-        console.log(ret)
+        // console.log(ret)
         return ret
       }],
       headers: { 
