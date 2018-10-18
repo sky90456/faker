@@ -24,24 +24,61 @@ const data = {
 }
 
 
+
+
+const data2 = {
+  protype: '平板电脑',
+  profullname: '平板电脑',
+  pri: 2099,
+  productpackage:'',
+  backurl: 'http://www.nwau.net/twpbdn/?cid=QQ&fbclid=IwAR2Xgfy-HWzeKTlvoj_OfvrRglp8oObChIUXWbOuR9Iu_Kl2tzm8-c3eWz8',
+  fromurl: 'http://www.nwau.net/twpbdn/?cid=QQ&fbclid=IwAR2Xgfy-HWzeKTlvoj_OfvrRglp8oObChIUXWbOuR9Iu_Kl2tzm8-c3eWz8',
+  cid: 'QQ',
+  bm:'',
+  num: 1,
+  proname: '白色平板 | 白色鼠标 | 蓝牙耳机 | 指环扣',
+  productpackage: '白色平板 + 白色鼠标 + 蓝牙耳机 + 指环扣',
+  'payment-method': '货到付款',
+  username: Random.getRandomName(),
+  mobile: Random.getRandomPhone(),
+  cusprovince: '台灣',
+  cuscity: '宜蘭縣',
+  cusarea: '冬山鄉',
+  addr: Random.getRandomAddress(),
+  postal: 0,
+  mail:Random.getRandomEmail()
+}
+
+
+
+
+
+
+
 const attack = async (proxy) => {
 
   try {
 
-
-
+    //http://t.beds-ym.com/shop/?m=Show&a=booking
+    //http://post.odaq.cn/order_hwd.php
     const postData = {
       method: 'post',
-      url: 'http://t.beds-ym.com/shop/?m=Show&a=booking',
-      data: data,
+      url: 'http://post.odaq.cn/order_hwd.php',
+      data: data2,
       transformRequest: [() => {
         let ret = ''
-        for (let it in data) {
+        for (let it in data2) {
           ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
         }
+        console.log(ret)
         return ret
       }],
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36(KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
+        'Accept': 'text / plain',
+        'Origin':'http://www.nwau.net'
+      },
       
     }
 
@@ -51,16 +88,24 @@ const attack = async (proxy) => {
     
 
 
-    const { data:resultData } = await axios(postData)
+    const result = await axios(postData)
 
-    if (!resultData) {return 'no data string response'}
+    if (!result.data) {return 'no data string response'}
 
-    console.log(resultData)
-    if (resultData.includes('"status":1') && resultData.includes('"info":"success"')) {
+    
+    
+
+    if (typeof result.data === 'object' ) {
       return 'ok'
     }else {
       return 'notok'
     }
+
+    // if (resultData.includes('"status":1') && resultData.includes('"info":"success"')) {
+    //   return 'ok'
+    // }else {
+    //   return 'notok'
+    // }
 
   } catch (e) {
     return e.message 
