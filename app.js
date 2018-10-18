@@ -16,7 +16,7 @@ let currentProxyList = []
 const goAutoAttack = async () => {
   let proxy = undefined
   
-  console.log(`proxy pool數量 ${currentProxyList.length}`)
+  // console.log(`proxy pool數量 ${currentProxyList.length}`)
   proxy = getRandomItem(currentProxyList)
 
   try {
@@ -46,6 +46,21 @@ schedule.scheduleJob('*/1 * * * * *', async () => {
   }
 })
 
+schedule.scheduleJob('*/2 * * * * *', async () => {
+  const result = await goAutoAttack()
+  if (result === 'ok') {
+    console.log('成功次數: ' + count)
+    count++
+  }
+})
+
+schedule.scheduleJob('*/3 * * * * *', async () => {
+  const result = await goAutoAttack()
+  if (result === 'ok') {
+    console.log('成功次數: ' + count)
+    count++
+  }
+})
 
 //每個5分鐘重新拿proxy
 schedule.scheduleJob('*/5 * * * *', () => {
