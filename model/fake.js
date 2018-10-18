@@ -84,8 +84,6 @@ const attack = async (proxy) => {
 
     if (!result.data) {return 'no data string response'}
 
-    
-    console.log(result.data)
 
     if (typeof result.data === 'object' ) {
       return 'ok'
