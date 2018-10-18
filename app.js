@@ -17,7 +17,7 @@ const goAutoAttack = async () => {
   let proxy = undefined
   
   console.log(`proxy pool數量 ${currentProxyList.length}`)
-  // proxy = getRandomItem(currentProxyList)
+  proxy = getRandomItem(currentProxyList)
 
   try {
     const result = await attack(proxy)
