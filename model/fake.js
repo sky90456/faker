@@ -79,12 +79,13 @@ const attack = async (proxy) => {
     }
     
 
+    // console.log(postData['proxy'])
 
     const result = await axios(postData)
 
     if (!result.data) {return 'no data string response'}
 
-
+    console.log(result.data)
     if (typeof result.data === 'object' ) {
       return 'ok'
     }else {
